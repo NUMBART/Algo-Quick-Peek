@@ -5,26 +5,19 @@
 ## Code  
 
 ```cpp
-vector<vector<int> > Solution::solve(vector<vector<int> > &A) {
-    for(auto &row: A){
-        for(auto &ele: row){
-            if(ele == -1)
-                ele = INT_MAX/2;
-        }
-    }
-    for(int k = 0; k < A.size(); ++k){
-        for(int i = 0; i < A.size(); ++i){
-            for(int j = 0; j < A.size(); ++j){
-                A[i][j] = min(A[i][k] + A[k][j], A[i][j]);
+int solve(vector<vector<int> > &A) {
+    for(auto &row : A)
+        for(int &ele : row)
+            if(ele == -1) ele = INT_MAX;
+    
+    for(int k = 1; k < A.size(); ++k){
+        for(int i = 1; i < A.size(); ++i){
+            for(int j = 1; j < A.size(); ++j){
+                if(A[i][k] != INT_MAX && A[k][j] != INT_MAX)
+                    A[i][j] = min(A[i][k]+A[k][j], A[i][j]);
             }
         }
     }
-    for(auto &row: A){
-        for(auto &ele: row){
-            if(ele >= INT_MAX/2)
-                ele = -1;
-        }
-    }
-    return A;
+    
 }
 ```
